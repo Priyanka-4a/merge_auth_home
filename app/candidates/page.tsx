@@ -1,44 +1,8 @@
-// // app/components/CandidatesPage.tsx
-
-// export default function CandidatesPage() {
-//     return (
-//       <div className="flex h-screen bg-gray-100">
-//         {/* Sidebar */}
-//         <div className="w-1/4 bg-white p-4 shadow-md">
-//           <h2 className="text-2xl font-bold mb-6">Candidates</h2>
-//         </div>
-  
-//         {/* Main Content */}
-//         <div className="flex-1 p-8">
-//           <div className="flex justify-between items-center mb-6">
-//             <h1 className="text-3xl font-bold">Top Candidates</h1>
-//             <button className="bg-black text-white py-2 px-4 rounded-lg">
-//               Create New Candidate
-//             </button>
-//           </div>
-  
-//           {/* No Candidates Section */}
-//           <div className="flex flex-col items-center justify-center h-full">
-//             <img
-//               src="/path/to/your/illustration.png"
-//               alt="No Candidates"
-//               className="mb-4"
-//             />
-//             <h2 className="text-2xl font-semibold mb-2">No Candidates Yet</h2>
-//             <p className="text-gray-500">
-//               You do not have any candidates yet. Create one to get started.
-//             </p>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-  
 "use client";
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 
-// Step 1: Define the Candidate interface
+// Define the Candidate interface
 interface Candidate {
   id: number;
   name: string;
@@ -58,12 +22,10 @@ const customStyles = {
 };
 
 export default function CandidatesPage() {
-  // Step 2: Update state definitions with the Candidate interface
-  const [candidates, setCandidates] = useState<Candidate[]>([]); // Array of Candidate objects
-  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null); // Selected candidate can be a Candidate or null
+  const [candidates, setCandidates] = useState<Candidate[]>([]); // Use the Candidate type
+  const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Fetch candidates from API
   const fetchCandidates = async () => {
     const res = await fetch("/api/candidates");
     const data = await res.json();
@@ -89,10 +51,10 @@ export default function CandidatesPage() {
         <div className="grid grid-cols-2 gap-4">
           {candidates.map((candidate) => (
             <div
-              key={candidate.id} // TypeScript now knows candidate has an id
+              key={candidate.id}
               className="border p-4 rounded-lg hover:shadow-lg cursor-pointer"
               onClick={() => {
-                setSelectedCandidate(candidate); // TypeScript now knows candidate has the correct shape
+                setSelectedCandidate(candidate);
                 openModal();
               }}
             >
